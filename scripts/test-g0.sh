@@ -94,6 +94,8 @@ check_io_empty() {
 
 check_io_roundtrip
 check_io_empty
+check_hex_bytes 09_unsigned_decimal "31383434363734343037333730393535313631350a"
+check_status 09_unsigned_decimal 0
 
 if [[ "$failures" -ne 0 ]]; then
     printf '%s G0 test(s) failed.\n' "$failures" >&2
