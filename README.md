@@ -80,9 +80,19 @@ The structure may evolve as the actual artifacts take shape.
 
 ## Current status
 
-**G0 initial source set and first lesson committed; execution verification pending.** The repository now contains five NASM programs, build and regression-test scripts, an environment checker, and the first guided lesson. The current execution environment used by the maintainer does not have NASM installed, and package installation could not be completed here. Therefore the assembly programs have not yet been assembled or executed in this session. They are not being represented as tested.
+**G0.01 baseline validated on the learner's Ubuntu x86-64 VM.** The learner
+reported that environment verification, the G0 build, and all G0 regression
+checks completed successfully on 2026-11-20. This confirms the supplied
+programs assemble, link, and behave as expected in that target environment.
 
-Start with [Lesson G0.01](lessons/G0/01-program-lifecycle.md). The lesson explains the required commands and expected results. The next step in project development is to obtain a real NASM build/test run, fix any issues it exposes, and then expand G0 with memory-layout and input/output lessons.
+The maintainer's own execution environment still lacks NASM, so this is
+recorded specifically as a successful learner-VM validation, not as a test
+performed by the maintainer.
+
+Start with [Lesson G0.01](lessons/G0/01-program-lifecycle.md). The next
+development work is to extend the foundation with memory layout, byte/word
+representation, addressing, and reliable input/output before beginning the
+first B-like language generation.
 
 See [the project charter](docs/PROJECT_CHARTER.md),
 [architecture and stage plan](docs/ARCHITECTURE.md),
