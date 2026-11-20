@@ -1,106 +1,67 @@
 # Progress Log
 
-## 2026-11-20 — G0.04 implemented; CI validation pending
+## 2026-11-20 — G0.05 implemented; corrected regression run pending
 
-### Unsigned integer-to-decimal conversion
-- Added `generations/G0/programs/09_unsigned_decimal.asm`.
-- Implements unsigned 64-bit to decimal ASCII conversion using repeated
-  division by 10 and remainder extraction, writing digits backward into a
-  buffer.
-- Uses a separate `write_all` routine for complete output, including
-  partial-write and EINTR handling.
-- Demonstrates the full unsigned 64-bit range endpoint by printing
-  UINT64_MAX (18446744073709551615).
-- Added `lessons/G0/04-integer-to-decimal.md`.
-- Added exact byte-for-byte output and exit-status regression checks.
+### Decimal text parser
+- Added `generations/G0/programs/10_parse_u64.asm`.
+- Reads a line of up to 20 decimal digits, accepts newline or EOF, rejects
+  non-digits and empty input, and detects both multiplication and addition
+  overflow while accumulating an unsigned 64-bit value.
+- Added `lessons/G0/05-decimal-input-parsing.md` with boundary examples.
+- Extended the regression suite to cover 0, 42, UINT64_MAX, UINT64_MAX + 1,
+  invalid characters, and empty input.
 
-### Verification status
-- The GitHub Actions workflow successfully completed its G0 build and
-  regression suite on Ubuntu 24.04 for the G0.02/G0.03 batch (run #3,
-  commit `4f8f6b4`). Environment verification, assembly/linking, and all
-  then-current regression checks passed.
-- G0.04 was added after that successful run. Its assembly and new regression
-  checks are awaiting the next CI run.
-- The learner VM has not yet reported validation of G0.02/G0.03/G0.04 as a
-  combined batch.
+### Verification and correction
+- GitHub Actions successfully assembled and linked the new parser source.
+- The first regression attempt exposed a defect in the test-script insertion:
+  the shell test calls had been split by literal newlines, producing an
+  unbound positional-parameter error. The parser itself assembled successfully;
+  the failure occurred in the test harness before parser cases could run.
+- Rewrote the test helper to pass input as a single argument and append the
+  newline inside the helper. The corrected regression script is committed.
+- The corrected full regression run is pending. No G0.05 test pass is claimed
+  until that run completes successfully.
 
-### Next development
-Add the complementary decimal-text-to-integer parser with input validation
-and overflow detection. Then specify the first G1 word-oriented language and
-its execution model before implementing its NASM interpreter.
+## 2026-11-20 — G0.04 validated by CI
 
-## 2026-11-20 — G0.02 and G0.03 implemented; learner verification pending
+- Added `09_unsigned_decimal.asm` and
+  `lessons/G0/04-integer-to-decimal.md`.
+- Converts UINT64_MAX to decimal ASCII by repeated unsigned division by 10,
+  writing the digits backward into a buffer.
+- Uses a separate write-all routine for reliable output.
+- GitHub Actions run #8 passed on Ubuntu 24.04, including environment
+  verification, assembly/linking of all G0 programs through G0.04, and the
+  complete regression suite for that batch.
 
-### G0.02 — Memory and data representation
-- Added `generations/G0/programs/06_memory.asm`: initialized `.data`,
-  reserved `.bss` storage, 64-bit load/store, and observable little-endian
-  byte order.
-- Added `generations/G0/programs/07_array.asm`: byte array traversal,
-  indexed addressing, zero-extension, and accumulation.
-- Added `lessons/G0/02-memory-and-data-representation.md` with exact commands,
-  expected bytes, exit status, and explanations.
+## 2026-11-20 — G0.02 and G0.03 validated by CI
 
-### G0.03 — Reliable Linux stream I/O
-- Added `generations/G0/programs/08_io.asm`: copies standard input to standard
-  output until EOF, retries interrupted reads/writes (`EINTR`), handles
-  partial writes, and exits with failure on other I/O errors.
-- The internal `write_all` routine tracks the next unwritten address and
-  remaining byte count; it treats zero progress as an error.
-- Added `lessons/G0/03-reliable-linux-io.md` with interactive and deterministic
-  usage instructions and a walkthrough of the I/O behavior.
-
-### Regression suite and CI
-- The G0 test script now rebuilds all examples on every run, avoiding stale
-  binaries.
-- It checks the exact byte sequence from the memory example, the array sum,
-  a 600-byte input/output round-trip (larger than the 256-byte buffer), and
-  empty input/EOF, in addition to all G0.01 checks.
-- Added `.github/workflows/g0.yml` to install NASM/binutils and run environment
-  verification, the full G0 build, and regression suite on pushes to main and
-  pull requests.
-- GitHub Actions run #3 completed successfully on Ubuntu 24.04. All steps
-  passed, including environment verification, assembly/linking, and the
-  regression suite for G0.01 through G0.03.
-- The learner's Ubuntu VM validation of this expanded batch is still pending.
+- G0.02 added memory sections, load/store, little-endian byte order, and
+  indexed byte-array access.
+- G0.03 added repeated reads, EOF handling, EINTR retry, partial-write
+  handling, and a write-all routine.
+- GitHub Actions run #3 passed on Ubuntu 24.04, including environment
+  verification, assembly/linking, and all G0.01–G0.03 regression checks.
+- The learner VM's validation of G0.02–G0.05 as a combined batch is pending.
 
 ## 2026-11-20 — G0.01 validated on learner Ubuntu VM
 
-### Validation reported by learner
-- `bash environment/verify.sh` completed successfully.
-- `bash scripts/build-g0.sh` assembled and linked all five initial G0 programs.
-- `bash scripts/test-g0.sh` completed with **All G0 checks passed.**
-- This validates the initial G0 program set and scripts in the learner's Ubuntu
-  x86-64 Hyper-V VM.
+- Learner reported successful environment verification, assembly/linking of
+  the initial five programs, and **All G0 checks passed**.
+- This is validation on the learner's Ubuntu x86-64 Hyper-V VM.
 
-### Verification boundary
-- This result is based on the learner's successful execution report.
-- No failure was reported, so no corrective code changes were required.
+## 2026-11-20 — Repository and G0 bootstrap
 
-## 2026-11-20 — G0 first implementation batch
-
-### Added
-- Five NASM examples covering process exit, stdout, arithmetic, conditional branching, and an internal function call.
-- A G0 build script and regression-test script.
-- An environment verification script.
-- The first complete guided lesson: `lessons/G0/01-program-lifecycle.md`.
-- A G0 overview and a clear distinction between Linux system calls and the System V AMD64 function-call convention.
-
-## 2026-11-20 — Repository bootstrap
-
-### Completed
-- Confirmed `aespino27/FromAssemblyToC` as the canonical project repository.
-- Established the maintainer/learner contract: the maintainer builds all core
-  lab artifacts; the learner follows and uses them.
-- Selected Ubuntu x86-64 under the existing Windows 11 / Hyper-V setup.
-- Selected NASM, GNU ld, Bash, Git, and Visual Studio Code.
-- Set hosted Linux executables as the initial execution model; no custom OS or
-  bootloader at the outset.
-- Added the project charter, architecture outline, environment baseline, and
-  this progress log.
-- Added source-backed historical notes and the historical-to-lab feature matrix.
+- Established the maintainer/learner contract: the maintainer creates and
+  maintains all implementation artifacts; the learner follows the supplied
+  labs without being asked to implement missing infrastructure.
+- Selected Ubuntu x86-64, NASM, GNU ld, Bash, Git, and VS Code.
+- Added the project charter, architecture, environment baseline, historical
+  notes, G0.01 programs, build/test scripts, and first lesson.
+- Added GitHub Actions CI to install NASM and run environment verification,
+  assembly/linking, and regression checks on pushes and pull requests.
 
 ### Current status
 
-**G0.01 validated by learner VM. G0.02 and G0.03 validated by GitHub Actions
-on Ubuntu 24.04. G0.04 implemented; CI and learner-VM validation pending.**
+**G0.01 validated on learner VM. G0.02–G0.04 validated by CI. G0.05 source
+assembles; its corrected regression suite is awaiting CI.**
 
