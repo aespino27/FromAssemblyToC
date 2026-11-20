@@ -20,6 +20,18 @@ and resolves symbols/relocations. NASM translates assembly source into object
 code. Linux loads the resulting executable. Keeping these roles explicit is
 part of the curriculum.
 
+## Historical-to-lab feature matrix
+
+The historical sequence is a design reference, not a set of source-compatible versions. See [Historical Notes](../references/HISTORICAL_NOTES.md) for source-backed detail.
+
+| Concern | B / early Unix context | New B / early C pressure | Lab treatment |
+|---|---|---|---|
+| Value model | One word/cell; interpretation depends on use | Distinguish character and integer data | G1 begins with one 64-bit cell; G3 introduces explicit widths |
+| Memory model | Word-addressed origins | PDP-11 byte addressing makes packed characters awkward | Contrast word-indexed and byte-addressed layouts experimentally |
+| Arrays and addresses | Vectors and indirection already present in B | Typed arrays and pointers become important | Introduce address arithmetic before then constrain it with element widths |
+| Execution | Early Unix B compiler used threaded code | Direct PDP-11 code generation addresses performance | Demonstrate interpretation first, then native code generation |
+| Hardware | PDP-7 18-bit words; PDP-11 16-bit words | Machine features shape representation and code generation | Modern x86-64 is explicitly an adaptation, never presented as historical hardware |
+
 ## Proposed generations
 
 These are design milestones, not promises that each will map one-to-one to a
