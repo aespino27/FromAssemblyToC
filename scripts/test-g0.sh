@@ -69,6 +69,32 @@ check_hex_bytes 06_memory "0807060504030201"
 check_status 06_memory 0
 check_status 07_array 15
 
+check_io_roundtrip() {
+    local expected actual
+    expected="$(printf '0123456789%.0s' {1..60})"
+    actual="$(printf '%s' "$expected" | "$BUILD_DIR/08_io")"
+    if [[ "$actual" == "$expected" ]]; then
+        printf 'PASS %-18s multi-buffer round-trip\n' "08_io"
+    else
+        printf 'FAIL %-18s input/output differs\n' "08_io"
+        failures=$((failures + 1))
+    fi
+}
+
+check_io_empty() {
+    local actual
+    actual="$("$BUILD_DIR/08_io" </dev/null)"
+    if [[ -z "$actual" ]]; then
+        printf 'PASS %-18s EOF on empty input\n' "08_io"
+    else
+        printf 'FAIL %-18s expected no output for empty input\n' "08_io"
+        failures=$((failures + 1))
+    fi
+}
+
+check_io_roundtrip
+check_io_empty
+
 if [[ "$failures" -ne 0 ]]; then
     printf '%s G0 test(s) failed.\n' "$failures" >&2
     exit 1
