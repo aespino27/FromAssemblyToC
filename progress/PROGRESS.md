@@ -1,38 +1,46 @@
 # Progress Log
 
-## 2026-11-20 — G0.02 implemented; learner verification pending
+## 2026-11-20 — G0.02 and G0.03 implemented; learner verification pending
 
-### Added
-- `generations/G0/programs/06_memory.asm`: initialized `.data`, reserved
-  `.bss` storage, 64-bit load/store, and observable little-endian byte order.
-- `generations/G0/programs/07_array.asm`: byte array traversal, indexed
-  addressing, zero-extension, and accumulation.
-- `lessons/G0/02-memory-and-data-representation.md`: complete learner lab
-  with exact commands, expected bytes, exit status, and explanations.
-- Expanded the G0 overview and architecture plan.
-- Updated the regression script to rebuild every example on each run, avoiding
-  accidental testing of stale binaries. It now checks the exact eight-byte
-  sequence emitted by the memory example and the array sum.
+### G0.02 — Memory and data representation
+- Added `generations/G0/programs/06_memory.asm`: initialized `.data`,
+  reserved `.bss` storage, 64-bit load/store, and observable little-endian
+  byte order.
+- Added `generations/G0/programs/07_array.asm`: byte array traversal,
+  indexed addressing, zero-extension, and accumulation.
+- Added `lessons/G0/02-memory-and-data-representation.md` with exact commands,
+  expected bytes, exit status, and explanations.
 
-### Maintainer-side checks and limitations
-- Reviewed the two new NASM sources for instruction, addressing, and syscall
-  consistency.
-- Ran Bash syntax validation on the updated test-script structure.
-- NASM is unavailable in the maintainer execution environment. The new
-  assembly sources have **not** been assembled or executed here.
-- G0.02 must be considered implemented, not yet validated, until the expanded
-  build and regression suite passes in the learner's Ubuntu VM.
+### G0.03 — Reliable Linux stream I/O
+- Added `generations/G0/programs/08_io.asm`: copies standard input to standard
+  output until EOF, retries interrupted reads/writes (`EINTR`), handles
+  partial writes, and exits with failure on other I/O errors.
+- The internal `write_all` routine tracks the next unwritten address and
+  remaining byte count; it treats zero progress as an error.
+- Added `lessons/G0/03-reliable-linux-io.md` with interactive and deterministic
+  usage instructions and a walkthrough of the I/O behavior.
+
+### Regression suite
+- The G0 test script now rebuilds all examples on every run, avoiding stale
+  binaries.
+- It checks the exact byte sequence from the memory example, the array sum,
+  a 600-byte input/output round-trip (larger than the 256-byte buffer), and
+  empty input/EOF, in addition to all G0.01 checks.
+- Bash syntax validation of the expanded test script passed in the maintainer
+  environment.
+- NASM is unavailable in the maintainer environment. The new NASM programs
+  have **not** been assembled or executed by the maintainer. G0.02 and G0.03
+  are implemented but await validation in the learner's Ubuntu VM.
 
 ### Learner verification
-From the repository root, run:
+From the repository root:
 
     git pull
+    bash environment/verify.sh
     bash scripts/build-g0.sh
     bash scripts/test-g0.sh
 
-The expanded suite must end with `All G0 checks passed.` The memory example
-should emit bytes `08 07 06 05 04 03 02 01` when inspected with `od`, and
-the array example should exit with status 15.
+The expanded suite must end with `All G0 checks passed.`
 
 ## 2026-11-20 — G0.01 validated on learner Ubuntu VM
 
@@ -48,17 +56,6 @@ the array example should exit with status 15.
 - The maintainer's execution environment still does not have NASM; the
   maintainer has not independently assembled or run these binaries.
 - No failure was reported, so no corrective code changes were required.
-
-### Next development
-Extend G0 in a dependency-aware sequence:
-1. Memory sections and representation: `.rodata`, `.data`, `.bss`,
-   addresses, bytes, words, little-endian layout, and load/store operations.
-2. Addressing and data structures: values versus addresses, indexed access,
-   arrays, and pointer-like operations at the machine level.
-3. Reliable Linux I/O: read/write system calls, error returns, partial writes,
-   and reusable string/integer conversion routines.
-4. Only after these foundations are in place, begin the first word-oriented
-   B-like language generation.
 
 ## 2026-11-20 — G0 first implementation batch
 
@@ -86,14 +83,11 @@ Extend G0 in a dependency-aware sequence:
   bootloader at the outset.
 - Added the project charter, architecture outline, environment baseline, and
   this progress log.
-
-### Completed since bootstrap
-- Added source-backed historical notes covering BCPL, B, the PDP-11 transition, NB, and early C.
-- Added a historical-to-lab feature matrix to the architecture plan.
-- Implemented and validated the initial G0 NASM foundation examples and scripts.
+- Added source-backed historical notes and the historical-to-lab feature matrix.
 
 ### Current status
 
-**G0.01 complete and validated on the learner's Ubuntu VM. G0.02 implemented;
-expanded assembly/build/test validation is pending.**
+**G0.01 complete and validated on the learner's Ubuntu VM. G0.02 (memory and
+arrays) and G0.03 (reliable stream I/O) implemented; expanded assembly/build/test
+validation is pending.**
 
