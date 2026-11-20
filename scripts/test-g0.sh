@@ -97,6 +97,60 @@ check_io_empty
 check_hex_bytes 09_unsigned_decimal "31383434363734343037333730393535313631350a"
 check_status 09_unsigned_decimal 0
 
+
+check_parse_status() {
+    local input="$1"
+    local expected="$2"
+    local actual
+    set +e
+    printf '%s' "$input" | "$BUILD_DIR/10_parse_u64"
+    actual=$?
+    set -e
+    if [[ "$actual" -eq "$expected" ]]; then
+        printf 'PASS %-18s parsed status %s\n' "10_parse_u64" "$actual"
+    else
+        printf 'FAIL %-18s expected status %s, got %s\n' "10_parse_u64" "$expected" "$actual"
+        failures=$((failures + 1))
+    fi
+}
+
+check_parse_status 
+    printf '%s G0 test(s) failed.\n' "$failures" >&2
+    exit 1
+fi
+
+printf 'All G0 checks passed.\n'
+42\n' 42
+check_parse_status 
+    printf '%s G0 test(s) failed.\n' "$failures" >&2
+    exit 1
+fi
+
+printf 'All G0 checks passed.\n'
+0\n' 0
+check_parse_status 
+    printf '%s G0 test(s) failed.\n' "$failures" >&2
+    exit 1
+fi
+
+printf 'All G0 checks passed.\n'
+18446744073709551615\n' 255
+check_parse_status 
+    printf '%s G0 test(s) failed.\n' "$failures" >&2
+    exit 1
+fi
+
+printf 'All G0 checks passed.\n'
+18446744073709551616\n' 1
+check_parse_status 
+    printf '%s G0 test(s) failed.\n' "$failures" >&2
+    exit 1
+fi
+
+printf 'All G0 checks passed.\n'
+12x\n' 1
+check_parse_status '' 1
+
 if [[ "$failures" -ne 0 ]]; then
     printf '%s G0 test(s) failed.\n' "$failures" >&2
     exit 1
