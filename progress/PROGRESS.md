@@ -29,8 +29,8 @@
 - Added `.github/workflows/g0.yml` to install NASM/binutils and run environment
   verification, the full G0 build, and regression suite on pushes to main and
   pull requests.
-- No GitHub Actions run was visible immediately after adding the workflow;
-  therefore CI has not yet supplied an independent pass/fail result.
+- GitHub Actions run #1 was created and entered execution on Ubuntu 24.04;
+  its result is still pending. CI has not yet supplied an independent pass/fail result.
 - Bash syntax validation of the expanded test script passed in the maintainer
   environment.
 - NASM is unavailable in the maintainer environment. The new NASM programs
