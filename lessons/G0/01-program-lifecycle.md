@@ -105,7 +105,7 @@ These argument and return registers belong to the System V AMD64 function callin
 
     bash scripts/test-g0.sh
 
-The script rebuilds the examples if the first executable is absent, then checks expected output and exit statuses. A successful run ends with:
+The script rebuilds all examples from the current NASM sources, then checks expected output and exit statuses. A successful run ends with:
 
     All G0 checks passed.
 
