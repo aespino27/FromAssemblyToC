@@ -74,6 +74,20 @@ check_parse_status() {
     fi
 }
 
+check_parse_eof() {
+    local actual
+    set +e
+    "$BUILD_DIR/10_parse_u64" </dev/null
+    actual=$?
+    set -e
+    if [[ "$actual" -eq 1 ]]; then
+        printf 'PASS %-18s EOF without digits\n' "10_parse_u64"
+    else
+        printf 'FAIL %-18s expected status 1 for empty EOF, got %s\n' "$actual"
+        failures=$((failures + 1))
+    fi
+}
+
 check_io_roundtrip() {
     local expected actual
     expected="$(printf '0123456789%.0s' {1..60})"
@@ -116,7 +130,9 @@ check_parse_status "0" 0
 check_parse_status "18446744073709551615" 255
 check_parse_status "18446744073709551616" 1
 check_parse_status "12x" 1
+check_parse_status "184467440737095516150" 1
 check_parse_status "" 1
+check_parse_eof
 
 if [[ "$failures" -ne 0 ]]; then
     printf '%s G0 test(s) failed.\n' "$failures" >&2
