@@ -80,7 +80,7 @@ The structure may evolve as the actual artifacts take shape.
 
 ## Current status
 
-**G0.01 validated by the learner; G0.02–G0.04 validated by GitHub Actions; G0.05 implemented and awaiting corrected CI.** The automated Ubuntu 24.04 runs have verified the memory, array, reliable I/O, and unsigned integer-to-decimal examples. The parser source also assembles and links successfully. Its first regression attempt exposed a test-harness quoting/insertion error, which has been corrected; the updated regression run is pending.
+**G0.01 validated by the learner; G0.02–G0.04 validated by GitHub Actions; G0.05 parser and core tests passed CI.** The automated Ubuntu 24.04 runs have verified the memory, array, reliable I/O, integer-to-decimal, and decimal parser examples. The first parser regression attempt exposed a test-harness insertion error; the helper was corrected, and CI run #18 passed the parser's main boundary cases. Two additional checks for a 21-digit input and empty EOF were added afterward; the latest run covering those additions is still in progress.
 
 The maintainer's local environment still lacks NASM, so GitHub Actions provides the independent assembler/linker/test environment. The learner's next VM run will validate the complete expanded G0 batch.
 
