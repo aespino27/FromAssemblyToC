@@ -1,0 +1,9 @@
+main() {
+    auto left, right, result;
+
+    left = 19;
+    right = 23;
+    result = left + right;
+
+    print result;
+}
