@@ -5,7 +5,7 @@ ROOT_DIR="$(cd -- "$(dirname -- "$0")/.." && pwd)"
 BUILD_DIR="$ROOT_DIR/build/g0"
 
 if [[ ! -x "$BUILD_DIR/01_exit" ]]; then
-    "$ROOT_DIR/scripts/build-g0.sh"
+    bash "$ROOT_DIR/scripts/build-g0.sh"
 fi
 
 failures=0
