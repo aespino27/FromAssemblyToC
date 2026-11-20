@@ -12,7 +12,7 @@ G0 is a collection of small Linux x86-64 ELF executables written directly in NAS
 | 04_branch.asm | Comparison and conditional branch | Prints equal |
 | 05_function.asm | call, ret, argument and return registers | Function computes 19 + 23; exits with 42 |
 | 06_memory.asm | Initialized data, reserved storage, load/store, byte order | Writes bytes 08 07 06 05 04 03 02 01 |
-| 07_array.asm | Byte array traversal and indexed addressing | Sums five elements; exits with 15 |\n| 08_io.asm | Repeated reads, partial-write handling, EINTR retry, EOF and errors | Copies stdin to stdout until EOF |
+| 07_array.asm | Byte array traversal and indexed addressing | Sums five elements; exits with 15 |\n| 08_io.asm | Repeated reads, partial-write handling, EINTR retry, EOF and errors | Copies stdin to stdout until EOF |\n| 09_unsigned_decimal.asm | Unsigned 64-bit division/remainder and decimal formatting | Prints UINT64_MAX as decimal ASCII |
 
 ## Build and test
 
