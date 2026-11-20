@@ -80,24 +80,14 @@ The structure may evolve as the actual artifacts take shape.
 
 ## Current status
 
-**G0.01 validated; G0.02 and G0.03 implemented, awaiting learner-VM verification.** The learner
-reported that the initial G0 environment, build, and regression checks passed
-on 2026-11-20. The repository now contains additional memory/array examples
-and a reliable stream-I/O example. The expanded regression script rebuilds
-all examples and checks byte layout, array arithmetic, multi-buffer input/output,
-and empty input.
+**G0.01 validated by the learner; G0.02 and G0.03 validated by GitHub Actions; G0.04 implemented and awaiting CI.** The initial five programs passed on the learner's Ubuntu VM. The expanded memory, array, and reliable I/O batch also passed the full automated build and regression suite on GitHub Actions' Ubuntu 24.04 runner.
 
-The maintainer's execution environment still lacks NASM. The new G0.02 and
-G0.03 assembly sources have therefore not yet been assembled or executed by
-the maintainer. A GitHub Actions workflow now installs NASM and runs the full
-G0 build and regression suite on pushes and pull requests; its first Ubuntu 24.04 run has started, but no
-result is available yet. The learner's next run will also validate the expanded
-batch on the target Ubuntu VM.
+G0.04 adds unsigned 64-bit integer-to-decimal conversion. Its new assembly source and exact-output regression check were committed after the successful CI run, so this newest example is awaiting CI and learner-VM verification. The maintainer's local environment still lacks NASM; automated CI is now the independent assembler/linker/test environment.
 
 Follow [Lesson G0.01](lessons/G0/01-program-lifecycle.md),
-[Lesson G0.02](lessons/G0/02-memory-and-data-representation.md), and
-[Lesson G0.03](lessons/G0/03-reliable-linux-io.md) in order. The next planned
-work is numeric/text conversion and the design of the first B-like language.
+[Lesson G0.02](lessons/G0/02-memory-and-data-representation.md),
+[Lesson G0.03](lessons/G0/03-reliable-linux-io.md), and
+[Lesson G0.04](lessons/G0/04-integer-to-decimal.md) in order. Next comes decimal-text parsing with validation and overflow detection, followed by the G1 language specification.
 
 See [the project charter](docs/PROJECT_CHARTER.md),
 [architecture and stage plan](docs/ARCHITECTURE.md),
