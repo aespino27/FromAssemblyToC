@@ -90,9 +90,9 @@ and empty input.
 The maintainer's execution environment still lacks NASM. The new G0.02 and
 G0.03 assembly sources have therefore not yet been assembled or executed by
 the maintainer. A GitHub Actions workflow now installs NASM and runs the full
-G0 build and regression suite on pushes and pull requests; its first run has
-not yet appeared. The learner's next run will also validate the expanded batch
-on the target Ubuntu VM.
+G0 build and regression suite on pushes and pull requests; its first Ubuntu 24.04 run has started, but no
+result is available yet. The learner's next run will also validate the expanded
+batch on the target Ubuntu VM.
 
 Follow [Lesson G0.01](lessons/G0/01-program-lifecycle.md),
 [Lesson G0.02](lessons/G0/02-memory-and-data-representation.md), and
