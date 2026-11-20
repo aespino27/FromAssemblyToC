@@ -13,7 +13,7 @@
 - Added the project charter, architecture outline, environment baseline, and
   this progress log.
 
-### Not yet implemented
+### Completed since bootstrap\n- Added source-backed historical notes covering BCPL, B, the PDP-11 transition, NB, and early C.\n- Added a historical-to-lab feature matrix to the architecture plan.\n\n### Not yet implemented
 - No NASM lesson artifacts or language implementation exists yet.
 - No environment setup script has been validated.
 - No language generation is marked complete.
