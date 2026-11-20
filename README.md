@@ -80,14 +80,15 @@ The structure may evolve as the actual artifacts take shape.
 
 ## Current status
 
-**G0.01 validated by the learner; G0.02 and G0.03 validated by GitHub Actions; G0.04 implemented and awaiting CI.** The initial five programs passed on the learner's Ubuntu VM. The expanded memory, array, and reliable I/O batch also passed the full automated build and regression suite on GitHub Actions' Ubuntu 24.04 runner.
+**G0.01 validated by the learner; G0.02–G0.04 validated by GitHub Actions; G0.05 implemented and awaiting corrected CI.** The automated Ubuntu 24.04 runs have verified the memory, array, reliable I/O, and unsigned integer-to-decimal examples. The parser source also assembles and links successfully. Its first regression attempt exposed a test-harness quoting/insertion error, which has been corrected; the updated regression run is pending.
 
-G0.04 adds unsigned 64-bit integer-to-decimal conversion. Its new assembly source and exact-output regression check were committed after the successful CI run, so this newest example is awaiting CI and learner-VM verification. The maintainer's local environment still lacks NASM; automated CI is now the independent assembler/linker/test environment.
+The maintainer's local environment still lacks NASM, so GitHub Actions provides the independent assembler/linker/test environment. The learner's next VM run will validate the complete expanded G0 batch.
 
 Follow [Lesson G0.01](lessons/G0/01-program-lifecycle.md),
 [Lesson G0.02](lessons/G0/02-memory-and-data-representation.md),
-[Lesson G0.03](lessons/G0/03-reliable-linux-io.md), and
-[Lesson G0.04](lessons/G0/04-integer-to-decimal.md) in order. Next comes decimal-text parsing with validation and overflow detection, followed by the G1 language specification.
+[Lesson G0.03](lessons/G0/03-reliable-linux-io.md),
+[Lesson G0.04](lessons/G0/04-integer-to-decimal.md), and
+[Lesson G0.05](lessons/G0/05-decimal-input-parsing.md) in order. After the parser passes, the next major work is the G1 word-oriented language specification and NASM interpreter.
 
 See [the project charter](docs/PROJECT_CHARTER.md),
 [architecture and stage plan](docs/ARCHITECTURE.md),
