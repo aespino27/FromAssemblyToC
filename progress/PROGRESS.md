@@ -1,5 +1,31 @@
 # Progress Log
 
+## 2026-11-20 — G0.01 validated on learner Ubuntu VM
+
+### Validation reported by learner
+- `bash environment/verify.sh` completed successfully.
+- `bash scripts/build-g0.sh` assembled and linked all five G0 programs.
+- `bash scripts/test-g0.sh` completed with **All G0 checks passed.**
+- This validates the initial G0 program set and scripts in the learner's Ubuntu
+  x86-64 Hyper-V VM.
+
+### Verification boundary
+- This result is based on the learner's successful execution report.
+- The maintainer's execution environment still does not have NASM; the
+  maintainer has not independently assembled or run these binaries.
+- No failure was reported, so no corrective code changes were required.
+
+### Next development
+Extend G0 in a dependency-aware sequence:
+1. Memory sections and representation: `.rodata`, `.data`, `.bss`,
+   addresses, bytes, words, little-endian layout, and load/store operations.
+2. Addressing and data structures: values versus addresses, indexed access,
+   arrays, and pointer-like operations at the machine level.
+3. Reliable Linux I/O: read/write system calls, error returns, partial writes,
+   and reusable string/integer conversion routines.
+4. Only after these foundations are in place, begin the first word-oriented
+   B-like language generation.
+
 ## 2026-11-20 — G0 first implementation batch
 
 ### Added
@@ -9,10 +35,10 @@
 - The first complete guided lesson: `lessons/G0/01-program-lifecycle.md`.
 - A G0 overview and a clear distinction between Linux system calls and the System V AMD64 function-call convention.
 
-### Verification status
+### Verification status at time of implementation
 - Bash syntax checked for the build script in the maintainer's Debian x86-64 tool environment.
-- NASM is not installed in that environment. An attempt to install it did not complete, so the NASM sources have **not** been assembled or executed here.
-- The repository test script is supplied, but its passing result is not claimed. The first learner run will validate the actual NASM build on the target Ubuntu VM.
+- NASM was not installed in that environment, so the NASM sources had not been assembled or executed there.
+- The learner's subsequent Ubuntu VM validation is recorded in the section above.
 
 ## 2026-11-20 — Repository bootstrap
 
@@ -27,20 +53,13 @@
 - Added the project charter, architecture outline, environment baseline, and
   this progress log.
 
-### Completed since bootstrap\n- Added source-backed historical notes covering BCPL, B, the PDP-11 transition, NB, and early C.\n- Added a historical-to-lab feature matrix to the architecture plan.\n\n### Not yet implemented
-- No NASM lesson artifacts or language implementation exists yet.
-- No environment setup script has been validated.
-- No language generation is marked complete.
-
-### Next work
-1. Research and document the historical B / New B / C design transitions,
-   carefully separating primary evidence from modern interpretation.
-2. Finalize the language-generation feature matrix and the initial I/O/runtime
-   boundary.
-3. Implement and test the G0 NASM foundation examples.
-4. Add a reproducible environment verification script and first guided lesson.
+### Completed since bootstrap
+- Added source-backed historical notes covering BCPL, B, the PDP-11 transition, NB, and early C.
+- Added a historical-to-lab feature matrix to the architecture plan.
+- Implemented and validated the initial G0 NASM foundation examples and scripts.
 
 ### Current status
 
-**Project definition: initialized. Lab implementation: not started.**
+**G0.01 complete and validated on the learner's Ubuntu VM.** Subsequent G0
+memory and I/O labs remain to be developed.
 
