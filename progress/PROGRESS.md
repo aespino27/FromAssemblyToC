@@ -1,6 +1,6 @@
 # Progress Log
 
-## 2026-11-20 — G0.05 implemented; corrected regression run pending
+## 2026-11-20 — G0.05 validated; G0 foundation complete
 
 ### Decimal text parser
 - Added `generations/G0/programs/10_parse_u64.asm`.
@@ -22,9 +22,9 @@
 - GitHub Actions run #18 passed on Ubuntu 24.04 with the corrected parser
   regression helper. The parser's ordinary value, zero, UINT64_MAX,
   UINT64_MAX + 1, invalid-character, and empty-line cases all passed.
-- Two additional boundary checks (21-digit input and EOF with zero bytes)
-  were added afterward; the newest CI run covering those additions is still
-  in progress.
+- Added two additional boundary checks (21-digit input and EOF with zero
+  bytes). GitHub Actions run #22 passed the complete suite, including these
+  additional cases. Its log ends with **All G0 checks passed.**
 
 ## 2026-11-20 — G0.04 validated by CI
 
@@ -66,6 +66,7 @@
 
 ### Current status
 
-**G0.01 validated on learner VM. G0.02–G0.04 validated by CI. G0.05 source
-assembles; its corrected regression suite is awaiting CI.**
+**G0.01 validated on learner VM. G0.01–G0.05 all build and pass the complete
+regression suite on GitHub Actions Ubuntu 24.04. G0 machine-level foundation
+is complete. Next: G1 language specification and interpreter.**
 
