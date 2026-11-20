@@ -80,22 +80,22 @@ The structure may evolve as the actual artifacts take shape.
 
 ## Current status
 
-**G0.01 validated; G0.02 implemented and awaiting learner-VM verification.** The learner
-reported that environment verification, the initial G0 build, and all G0.01
-regression checks completed successfully on 2026-11-20. The repository now
-also contains two new memory/addressing examples and the G0.02 lesson. The
-expanded regression script rebuilds every example and checks the byte layout
-and array result.
+**G0.01 validated; G0.02 and G0.03 implemented, awaiting learner-VM verification.** The learner
+reported that the initial G0 environment, build, and regression checks passed
+on 2026-11-20. The repository now contains additional memory/array examples
+and a reliable stream-I/O example. The expanded regression script rebuilds
+all examples and checks byte layout, array arithmetic, multi-buffer input/output,
+and empty input.
 
-The maintainer's execution environment still lacks NASM. The new G0.02 NASM
-sources have therefore not yet been assembled or executed by the maintainer;
-the learner's next run will validate this expanded batch on the target Ubuntu
-VM.
+The maintainer's execution environment still lacks NASM. The new G0.02 and
+G0.03 assembly sources have therefore not yet been assembled or executed by
+the maintainer. The learner's next run will validate the expanded batch on
+the target Ubuntu VM.
 
-Start with [Lesson G0.01](lessons/G0/01-program-lifecycle.md), then continue
-with [Lesson G0.02](lessons/G0/02-memory-and-data-representation.md). The next
-planned development stage is reliable input/output before beginning the first
-B-like language generation.
+Follow [Lesson G0.01](lessons/G0/01-program-lifecycle.md),
+[Lesson G0.02](lessons/G0/02-memory-and-data-representation.md), and
+[Lesson G0.03](lessons/G0/03-reliable-linux-io.md) in order. The next planned
+work is numeric/text conversion and the design of the first B-like language.
 
 See [the project charter](docs/PROJECT_CHARTER.md),
 [architecture and stage plan](docs/ARCHITECTURE.md),
