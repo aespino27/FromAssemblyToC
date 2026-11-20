@@ -1,5 +1,34 @@
 # Progress Log
 
+## 2026-11-20 — G0.04 implemented; CI validation pending
+
+### Unsigned integer-to-decimal conversion
+- Added `generations/G0/programs/09_unsigned_decimal.asm`.
+- Implements unsigned 64-bit to decimal ASCII conversion using repeated
+  division by 10 and remainder extraction, writing digits backward into a
+  buffer.
+- Uses a separate `write_all` routine for complete output, including
+  partial-write and EINTR handling.
+- Demonstrates the full unsigned 64-bit range endpoint by printing
+  UINT64_MAX (18446744073709551615).
+- Added `lessons/G0/04-integer-to-decimal.md`.
+- Added exact byte-for-byte output and exit-status regression checks.
+
+### Verification status
+- The GitHub Actions workflow successfully completed its G0 build and
+  regression suite on Ubuntu 24.04 for the G0.02/G0.03 batch (run #3,
+  commit `4f8f6b4`). Environment verification, assembly/linking, and all
+  then-current regression checks passed.
+- G0.04 was added after that successful run. Its assembly and new regression
+  checks are awaiting the next CI run.
+- The learner VM has not yet reported validation of G0.02/G0.03/G0.04 as a
+  combined batch.
+
+### Next development
+Add the complementary decimal-text-to-integer parser with input validation
+and overflow detection. Then specify the first G1 word-oriented language and
+its execution model before implementing its NASM interpreter.
+
 ## 2026-11-20 — G0.02 and G0.03 implemented; learner verification pending
 
 ### G0.02 — Memory and data representation
@@ -29,23 +58,10 @@
 - Added `.github/workflows/g0.yml` to install NASM/binutils and run environment
   verification, the full G0 build, and regression suite on pushes to main and
   pull requests.
-- GitHub Actions run #1 was created and entered execution on Ubuntu 24.04;
-  its result is still pending. CI has not yet supplied an independent pass/fail result.
-- Bash syntax validation of the expanded test script passed in the maintainer
-  environment.
-- NASM is unavailable in the maintainer environment. The new NASM programs
-  have **not** been assembled or executed by the maintainer. G0.02 and G0.03
-  are implemented but await validation in the learner's Ubuntu VM.
-
-### Learner verification
-From the repository root:
-
-    git pull
-    bash environment/verify.sh
-    bash scripts/build-g0.sh
-    bash scripts/test-g0.sh
-
-The expanded suite must end with `All G0 checks passed.`
+- GitHub Actions run #3 completed successfully on Ubuntu 24.04. All steps
+  passed, including environment verification, assembly/linking, and the
+  regression suite for G0.01 through G0.03.
+- The learner's Ubuntu VM validation of this expanded batch is still pending.
 
 ## 2026-11-20 — G0.01 validated on learner Ubuntu VM
 
@@ -58,8 +74,6 @@ The expanded suite must end with `All G0 checks passed.`
 
 ### Verification boundary
 - This result is based on the learner's successful execution report.
-- The maintainer's execution environment still does not have NASM; the
-  maintainer has not independently assembled or run these binaries.
 - No failure was reported, so no corrective code changes were required.
 
 ## 2026-11-20 — G0 first implementation batch
@@ -70,11 +84,6 @@ The expanded suite must end with `All G0 checks passed.`
 - An environment verification script.
 - The first complete guided lesson: `lessons/G0/01-program-lifecycle.md`.
 - A G0 overview and a clear distinction between Linux system calls and the System V AMD64 function-call convention.
-
-### Verification status at time of implementation
-- Bash syntax checked for the build script in the maintainer's Debian x86-64 tool environment.
-- NASM was not installed in that environment, so the NASM sources had not been assembled or executed there.
-- The learner's subsequent Ubuntu VM validation is recorded above.
 
 ## 2026-11-20 — Repository bootstrap
 
@@ -92,7 +101,6 @@ The expanded suite must end with `All G0 checks passed.`
 
 ### Current status
 
-**G0.01 complete and validated on the learner's Ubuntu VM. G0.02 (memory and
-arrays) and G0.03 (reliable stream I/O) implemented; expanded assembly/build/test
-validation is pending.**
+**G0.01 validated by learner VM. G0.02 and G0.03 validated by GitHub Actions
+on Ubuntu 24.04. G0.04 implemented; CI and learner-VM validation pending.**
 
