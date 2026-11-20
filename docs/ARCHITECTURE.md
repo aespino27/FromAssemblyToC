@@ -40,9 +40,7 @@ generation is implemented and tested.
 
 ### G0 — Machine-level foundation
 
-NASM programs establish the execution model: registers, memory, integer
-operations, branches, stack, procedure calls, data representation, and Linux
-system calls. The learner runs and inspects supplied programs.
+NASM programs establish the execution model in a deliberate order: process entry and exit; integer operations, branches, and calls; memory sections, addresses, byte order, and arrays; then reliable Linux input/output. The learner runs and inspects supplied programs. G0 is not complete until these foundations and their regression checks have been exercised.
 
 ### G1 — A word-oriented symbolic language
 
