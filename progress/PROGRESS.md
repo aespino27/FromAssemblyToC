@@ -19,8 +19,12 @@
   the failure occurred in the test harness before parser cases could run.
 - Rewrote the test helper to pass input as a single argument and append the
   newline inside the helper. The corrected regression script is committed.
-- The corrected full regression run is pending. No G0.05 test pass is claimed
-  until that run completes successfully.
+- GitHub Actions run #18 passed on Ubuntu 24.04 with the corrected parser
+  regression helper. The parser's ordinary value, zero, UINT64_MAX,
+  UINT64_MAX + 1, invalid-character, and empty-line cases all passed.
+- Two additional boundary checks (21-digit input and EOF with zero bytes)
+  were added afterward; the newest CI run covering those additions is still
+  in progress.
 
 ## 2026-11-20 — G0.04 validated by CI
 
