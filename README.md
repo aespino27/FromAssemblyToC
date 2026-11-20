@@ -80,19 +80,22 @@ The structure may evolve as the actual artifacts take shape.
 
 ## Current status
 
-**G0.01 baseline validated on the learner's Ubuntu x86-64 VM.** The learner
-reported that environment verification, the G0 build, and all G0 regression
-checks completed successfully on 2026-11-20. This confirms the supplied
-programs assemble, link, and behave as expected in that target environment.
+**G0.01 validated; G0.02 implemented and awaiting learner-VM verification.** The learner
+reported that environment verification, the initial G0 build, and all G0.01
+regression checks completed successfully on 2026-11-20. The repository now
+also contains two new memory/addressing examples and the G0.02 lesson. The
+expanded regression script rebuilds every example and checks the byte layout
+and array result.
 
-The maintainer's own execution environment still lacks NASM, so this is
-recorded specifically as a successful learner-VM validation, not as a test
-performed by the maintainer.
+The maintainer's execution environment still lacks NASM. The new G0.02 NASM
+sources have therefore not yet been assembled or executed by the maintainer;
+the learner's next run will validate this expanded batch on the target Ubuntu
+VM.
 
-Start with [Lesson G0.01](lessons/G0/01-program-lifecycle.md). The next
-development work is to extend the foundation with memory layout, byte/word
-representation, addressing, and reliable input/output before beginning the
-first B-like language generation.
+Start with [Lesson G0.01](lessons/G0/01-program-lifecycle.md), then continue
+with [Lesson G0.02](lessons/G0/02-memory-and-data-representation.md). The next
+planned development stage is reliable input/output before beginning the first
+B-like language generation.
 
 See [the project charter](docs/PROJECT_CHARTER.md),
 [architecture and stage plan](docs/ARCHITECTURE.md),
