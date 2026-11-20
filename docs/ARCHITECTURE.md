@@ -42,11 +42,21 @@ generation is implemented and tested.
 
 NASM programs establish the execution model in a deliberate order: process entry and exit; integer operations, branches, and calls; memory sections, addresses, byte order, and arrays; reliable Linux input/output; and conversion between binary integers and decimal text. The learner runs and inspects supplied programs. G0 is not complete until these foundations and their regression checks have been exercised.
 
-### G1 — A word-oriented symbolic language
+### G1 — W1, a word-oriented symbolic language
 
-Introduce a tiny language whose values and operations are deliberately close
-to machine words. The learner uses a supplied NASM implementation to run
-programs and sees how names, expressions, and control flow can be represented.
+The normative initial language is W1 version 0.1, specified in
+[G1_LANGUAGE_SPEC.md](G1_LANGUAGE_SPEC.md). W1 has one main block, auto
+declarations, assignments, unsigned 64-bit word values, arithmetic expressions,
+and a print built-in. Its source-to-execution path is implemented entirely in
+NASM.
+
+The interpreter lexes and parses source, resolves variable names to cell
+indexes, and generates a direct-threaded instruction stream. Each fixed-size
+instruction record contains a NASM handler address and one operand. A NASM
+virtual machine dispatches through those handler addresses. This is a modern
+teaching analogue to early B threaded execution, not a reproduction of the
+historical implementation. Control flow, functions, arrays, and typed data
+are intentionally deferred to later milestones.
 
 ### G2 — A more usable B-like language
 
@@ -90,13 +100,12 @@ Where practical, the lab will make direct system calls from NASM. Any use of
 libc or another compiled runtime would require explicit justification and is
 not part of the default plan.
 
-## Open design questions for implementation
+## Remaining design questions
 
-- Choose a minimal input/output convention for early language programs.
-- Decide whether G1 executes source directly or first lowers to a compact
-  bytecode. The choice must serve the learning objective, not convenience alone.
-- Define the smallest useful grammar and error-reporting strategy.
-- Decide the transition point from interpretation to native code generation.
-- Establish automated regression tests that run without high-level language
-  tooling.
+- Define exact diagnostic formatting and source-position reporting during G1
+  implementation.
+- Decide the transition point from the threaded interpreter to native code
+  generation in G4.
+- Expand regression coverage as each language feature is introduced, without
+  using high-level language tooling for the implementation.
 
