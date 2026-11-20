@@ -80,11 +80,12 @@ The structure may evolve as the actual artifacts take shape.
 
 ## Current status
 
-**Bootstrap / project definition.** The repository has been created and the
-technical and pedagogical contract is being established. No lesson should be
-considered implemented until its artifacts and verification steps are present.
+**G0 initial source set and first lesson committed; execution verification pending.** The repository now contains five NASM programs, build and regression-test scripts, an environment checker, and the first guided lesson. The current execution environment used by the maintainer does not have NASM installed, and package installation could not be completed here. Therefore the assembly programs have not yet been assembled or executed in this session. They are not being represented as tested.
+
+Start with [Lesson G0.01](lessons/G0/01-program-lifecycle.md). The lesson explains the required commands and expected results. The next step in project development is to obtain a real NASM build/test run, fix any issues it exposes, and then expand G0 with memory-layout and input/output lessons.
 
 See [the project charter](docs/PROJECT_CHARTER.md),
 [architecture and stage plan](docs/ARCHITECTURE.md),
-[environment baseline](environment/README.md), and
+[environment baseline](environment/README.md),
+[historical notes](references/HISTORICAL_NOTES.md), and
 [progress log](progress/PROGRESS.md).
