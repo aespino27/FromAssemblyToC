@@ -42,3 +42,22 @@ and tests. NASM and GNU ld are allowed foundational tools.
 language/compiler is available. The distinction between assembler, linker,
 loader, and language compiler will be taught explicitly.
 
+
+## D-005 — W1 begins as a word-oriented threaded language
+
+**Date:** 2026-11-20
+
+**Decision:** The first lab language is W1 (Word Language), specified in
+`docs/G1_LANGUAGE_SPEC.md`. It uses unsigned 64-bit cells, a single
+`main()` block, `auto` declarations, assignment, arithmetic expressions,
+and a `print` built-in. Its NASM interpreter will parse source into a
+direct-threaded instruction stream and execute it in a NASM virtual machine.
+
+**Reason:** This provides a complete but deliberately narrow language while
+making the word-oriented data model and threaded execution strategy tangible.
+It is a modern teaching analogy to early B, not a reconstruction of B's
+original source, syntax, or exact threaded-code representation.
+
+**Consequences:** Character data, pointers, arrays, control flow, and
+user-defined functions are deferred. The W1 specification is normative for
+the first interpreter implementation; any changes must be recorded.
