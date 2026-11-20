@@ -80,7 +80,7 @@ The structure may evolve as the actual artifacts take shape.
 
 ## Current status
 
-**G0.01 validated by the learner; G0.02–G0.04 validated by GitHub Actions; G0.05 parser and core tests passed CI.** The automated Ubuntu 24.04 runs have verified the memory, array, reliable I/O, integer-to-decimal, and decimal parser examples. The first parser regression attempt exposed a test-harness insertion error; the helper was corrected, and CI run #18 passed the parser's main boundary cases. Two additional checks for a 21-digit input and empty EOF were added afterward; the latest run covering those additions is still in progress.
+**G0 machine-level foundation complete.** The learner validated the original G0.01 batch on the Ubuntu VM. GitHub Actions run #22 then passed the complete expanded suite on Ubuntu 24.04 with NASM 2.16.01, including all ten programs and all regression cases through decimal parsing, overflow detection, overlong input, and empty EOF. The CI log ends with **All G0 checks passed.**
 
 The maintainer's local environment still lacks NASM, so GitHub Actions provides the independent assembler/linker/test environment. The learner's next VM run will validate the complete expanded G0 batch.
 
@@ -88,7 +88,7 @@ Follow [Lesson G0.01](lessons/G0/01-program-lifecycle.md),
 [Lesson G0.02](lessons/G0/02-memory-and-data-representation.md),
 [Lesson G0.03](lessons/G0/03-reliable-linux-io.md),
 [Lesson G0.04](lessons/G0/04-integer-to-decimal.md), and
-[Lesson G0.05](lessons/G0/05-decimal-input-parsing.md) in order. After the parser passes, the next major work is the G1 word-oriented language specification and NASM interpreter.
+[Lesson G0.05](lessons/G0/05-decimal-input-parsing.md) in order. G0 is now complete; the next development stage is the G1 word-oriented language specification and NASM interpreter.
 
 See [the project charter](docs/PROJECT_CHARTER.md),
 [architecture and stage plan](docs/ARCHITECTURE.md),
