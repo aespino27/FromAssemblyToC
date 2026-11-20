@@ -20,12 +20,17 @@
 - Added `lessons/G0/03-reliable-linux-io.md` with interactive and deterministic
   usage instructions and a walkthrough of the I/O behavior.
 
-### Regression suite
+### Regression suite and CI
 - The G0 test script now rebuilds all examples on every run, avoiding stale
   binaries.
 - It checks the exact byte sequence from the memory example, the array sum,
   a 600-byte input/output round-trip (larger than the 256-byte buffer), and
   empty input/EOF, in addition to all G0.01 checks.
+- Added `.github/workflows/g0.yml` to install NASM/binutils and run environment
+  verification, the full G0 build, and regression suite on pushes to main and
+  pull requests.
+- No GitHub Actions run was visible immediately after adding the workflow;
+  therefore CI has not yet supplied an independent pass/fail result.
 - Bash syntax validation of the expanded test script passed in the maintainer
   environment.
 - NASM is unavailable in the maintainer environment. The new NASM programs
