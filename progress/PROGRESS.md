@@ -1,5 +1,19 @@
 # Progress Log
 
+## 2026-11-20 — G0 first implementation batch
+
+### Added
+- Five NASM examples covering process exit, stdout, arithmetic, conditional branching, and an internal function call.
+- A G0 build script and regression-test script.
+- An environment verification script.
+- The first complete guided lesson: `lessons/G0/01-program-lifecycle.md`.
+- A G0 overview and a clear distinction between Linux system calls and the System V AMD64 function-call convention.
+
+### Verification status
+- Bash syntax checked for the build script in the maintainer's Debian x86-64 tool environment.
+- NASM is not installed in that environment. An attempt to install it did not complete, so the NASM sources have **not** been assembled or executed here.
+- The repository test script is supplied, but its passing result is not claimed. The first learner run will validate the actual NASM build on the target Ubuntu VM.
+
 ## 2026-11-20 — Repository bootstrap
 
 ### Completed
