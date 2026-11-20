@@ -18,12 +18,19 @@ kernel, bootloader, or graphical environment is required.
 QEMU is optional and will only be installed if a specific stage benefits from
 machine emulation.
 
-## Installation
+## Verification and installation
 
-Do not install anything solely on the basis of this preliminary document.
-The first environment lesson will provide a version-checked setup script and
-verification commands after the initial source tree and tool requirements have
-been tested together.
+Run the repository check from its root:
+
+    bash environment/verify.sh
+
+It checks the architecture and availability of Bash, Git, NASM, and GNU ld.
+On Ubuntu, install the required packages with:
+
+    sudo apt update
+    sudo apt install nasm binutils git
+
+Then rerun the verification script. The script does not modify the system or install packages automatically.
 
 ## Platform assumptions
 
