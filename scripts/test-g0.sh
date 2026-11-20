@@ -83,7 +83,7 @@ check_parse_eof() {
     if [[ "$actual" -eq 1 ]]; then
         printf 'PASS %-18s EOF without digits\n' "10_parse_u64"
     else
-        printf 'FAIL %-18s expected status 1 for empty EOF, got %s\n' "$actual"
+        printf 'FAIL %-18s expected status 1 for empty EOF, got %s\n' "10_parse_u64" "$actual"
         failures=$((failures + 1))
     fi
 }
