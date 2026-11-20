@@ -1,0 +1,9 @@
+main() {
+    auto value;
+
+    value = 7;
+    print value;
+
+    value = value * 6;
+    print value;
+}
