@@ -1,10 +1,44 @@
 # Progress Log
 
+## 2026-11-20 — G0.02 implemented; learner verification pending
+
+### Added
+- `generations/G0/programs/06_memory.asm`: initialized `.data`, reserved
+  `.bss` storage, 64-bit load/store, and observable little-endian byte order.
+- `generations/G0/programs/07_array.asm`: byte array traversal, indexed
+  addressing, zero-extension, and accumulation.
+- `lessons/G0/02-memory-and-data-representation.md`: complete learner lab
+  with exact commands, expected bytes, exit status, and explanations.
+- Expanded the G0 overview and architecture plan.
+- Updated the regression script to rebuild every example on each run, avoiding
+  accidental testing of stale binaries. It now checks the exact eight-byte
+  sequence emitted by the memory example and the array sum.
+
+### Maintainer-side checks and limitations
+- Reviewed the two new NASM sources for instruction, addressing, and syscall
+  consistency.
+- Ran Bash syntax validation on the updated test-script structure.
+- NASM is unavailable in the maintainer execution environment. The new
+  assembly sources have **not** been assembled or executed here.
+- G0.02 must be considered implemented, not yet validated, until the expanded
+  build and regression suite passes in the learner's Ubuntu VM.
+
+### Learner verification
+From the repository root, run:
+
+    git pull
+    bash scripts/build-g0.sh
+    bash scripts/test-g0.sh
+
+The expanded suite must end with `All G0 checks passed.` The memory example
+should emit bytes `08 07 06 05 04 03 02 01` when inspected with `od`, and
+the array example should exit with status 15.
+
 ## 2026-11-20 — G0.01 validated on learner Ubuntu VM
 
 ### Validation reported by learner
 - `bash environment/verify.sh` completed successfully.
-- `bash scripts/build-g0.sh` assembled and linked all five G0 programs.
+- `bash scripts/build-g0.sh` assembled and linked all five initial G0 programs.
 - `bash scripts/test-g0.sh` completed with **All G0 checks passed.**
 - This validates the initial G0 program set and scripts in the learner's Ubuntu
   x86-64 Hyper-V VM.
@@ -38,7 +72,7 @@ Extend G0 in a dependency-aware sequence:
 ### Verification status at time of implementation
 - Bash syntax checked for the build script in the maintainer's Debian x86-64 tool environment.
 - NASM was not installed in that environment, so the NASM sources had not been assembled or executed there.
-- The learner's subsequent Ubuntu VM validation is recorded in the section above.
+- The learner's subsequent Ubuntu VM validation is recorded above.
 
 ## 2026-11-20 — Repository bootstrap
 
@@ -60,6 +94,6 @@ Extend G0 in a dependency-aware sequence:
 
 ### Current status
 
-**G0.01 complete and validated on the learner's Ubuntu VM.** Subsequent G0
-memory and I/O labs remain to be developed.
+**G0.01 complete and validated on the learner's Ubuntu VM. G0.02 implemented;
+expanded assembly/build/test validation is pending.**
 
