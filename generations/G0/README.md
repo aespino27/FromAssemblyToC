@@ -12,7 +12,7 @@ G0 is a collection of small Linux x86-64 ELF executables written directly in NAS
 | 04_branch.asm | Comparison and conditional branch | Prints equal |
 | 05_function.asm | call, ret, argument and return registers | Function computes 19 + 23; exits with 42 |
 | 06_memory.asm | Initialized data, reserved storage, load/store, byte order | Writes bytes 08 07 06 05 04 03 02 01 |
-| 07_array.asm | Byte array traversal and indexed addressing | Sums five elements; exits with 15 |
+| 07_array.asm | Byte array traversal and indexed addressing | Sums five elements; exits with 15 |\n| 08_io.asm | Repeated reads, partial-write handling, EINTR retry, EOF and errors | Copies stdin to stdout until EOF |
 
 ## Build and test
 
@@ -55,6 +55,6 @@ The Linux x86-64 system-call convention is distinct from the System V AMD64 func
 - `lea reg, [label]`: computes an address.
 - `movzx`: loads a narrow integer and zero-extends it to a wider register.
 
-The memory example demonstrates x86-64 little-endian representation by writing the eight bytes of a known 64-bit value. The array example demonstrates indexed byte access and accumulation.
+The memory example demonstrates x86-64 little-endian representation by writing the eight bytes of a known 64-bit value. The array example demonstrates indexed byte access and accumulation. The I/O example copies an input stream in 256-byte chunks, retries interrupted system calls, and completes partial writes before reading more data.
 
 These are still machine-level building blocks, not yet a language. G0 gives us a verified vocabulary for designing the value, memory, and runtime models of later generations.
