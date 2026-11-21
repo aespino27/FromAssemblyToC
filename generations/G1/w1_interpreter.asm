@@ -366,11 +366,11 @@ declare_current:
     mov r8, [symbol_count]
     cmp r8, MAX_VARS
     jae capacity_error
-    lea rdi, [rel token_text]
-    lea rsi, [rel symbol_table]
+    lea rsi, [rel token_text]
+    lea rdi, [rel symbol_table]
     mov rax, r8
     shl rax, 5
-    add rsi, rax
+    add rdi, rax
     mov ecx, 32
     rep movsb
     inc qword [symbol_count]
@@ -711,8 +711,4 @@ fatal_error:
     mov eax, 60
     syscall
 
-%macro EXPECT 1
-    cmp qword [token_kind], %1
-    jne compile_error
-    call next_token
-%endmacro
+
