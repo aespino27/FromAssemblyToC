@@ -130,11 +130,11 @@ check_failure "remainder by zero" 'main() { print 10 % 0; }'
 check_failure "reserved identifier" 'main() { auto print; }'
 check_failure "identifier over 31 chars" 'main() { auto abcdefghijklmnopqrstuvwxyzabcdef; }'
 vars='main() { auto '
-for name in $(seq 1 65); do vars+="v\${name},"; done
-vars="\${vars%,}; print 0; }"
+for name in $(seq 1 65); do vars+="v${name},"; done
+vars="${vars%,}; print 0; }"
 check_failure "more than 64 variables" "$vars"
 large='main() { print 1; '
-while [[ \${#large} -le 4100 ]]; do large+=' '; done
+while [[ ${#large} -le 4100 ]]; do large+=' '; done
 large+='}'
 check_failure "source exceeds 4096 bytes" "$large"
 if [[ "$failures" -ne 0 ]]; then
