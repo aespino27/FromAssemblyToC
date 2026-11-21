@@ -5,7 +5,7 @@ Its normative design is documented in [the W1 language specification](../../docs
 
 ## Status
 
-<badge>Complete — CI validated</badge>
+**Status: Complete — CI validated**
 
 The NASM interpreter, build script, regression suite, and learner lab are
 committed. GitHub Actions run #44850709283 passed on Ubuntu 24.04 with
