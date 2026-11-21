@@ -80,15 +80,15 @@ The structure may evolve as the actual artifacts take shape.
 
 ## Current status
 
-**G0 machine-level foundation complete.** The learner validated the original G0.01 batch on the Ubuntu VM. GitHub Actions run #22 then passed the complete expanded suite on Ubuntu 24.04 with NASM 2.16.01, including all ten programs and all regression cases through decimal parsing, overflow detection, overlong input, and empty EOF. The CI log ends with **All G0 checks passed.**
+**G0 machine-level foundation complete.** The learner validated the original G0.01 batch on the Ubuntu VM. GitHub Actions run #22 passed the complete expanded suite on Ubuntu 24.04 with NASM 2.16.01, including all ten programs and regression cases through decimal parsing, overflow detection, overlong input, and empty EOF.
 
-The maintainer's local environment still lacks NASM, so GitHub Actions provides the independent assembler/linker/test environment. The learner's next VM run will validate the complete expanded G0 batch.
+G1 now has a committed NASM implementation of the W1 v0.1 lexer, parser, direct-threaded code generator, and VM, together with build/test scripts and [Lesson G1.01](lessons/G1/01-first-word-language.md). Its dedicated GitHub Actions validation is pending; the lesson should be run only after that workflow passes.
 
 Follow [Lesson G0.01](lessons/G0/01-program-lifecycle.md),
 [Lesson G0.02](lessons/G0/02-memory-and-data-representation.md),
 [Lesson G0.03](lessons/G0/03-reliable-linux-io.md),
 [Lesson G0.04](lessons/G0/04-integer-to-decimal.md), and
-[Lesson G0.05](lessons/G0/05-decimal-input-parsing.md) in order. G0 is now complete; the next development stage is the G1 word-oriented language specification and NASM interpreter.
+[Lesson G0.05](lessons/G0/05-decimal-input-parsing.md) in order. G0 is complete; G1 implementation is in validation.
 
 See [the project charter](docs/PROJECT_CHARTER.md),
 [architecture and stage plan](docs/ARCHITECTURE.md),
