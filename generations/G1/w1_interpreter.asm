@@ -16,6 +16,7 @@ default rel
 %define MAX_CODE   512
 %define MAX_STACK  256
 
+
 section .bss
 source_buf:     resb MAX_SOURCE + 1
 source_len:     resq 1
@@ -28,6 +29,7 @@ identifier_len: resq 1
 symbol_count:   resq 1
 symbol_table:   resb MAX_VARS * 32
 temp_index:     resq 1
+assignment_index: resq 1
 temp_value:     resq 1
 operator_kind:  resq 1
 instruction_count: resq 1
@@ -82,13 +84,13 @@ _start:
     call find_symbol
     cmp rax, -1
     je compile_error
-    mov [temp_index], rax
+    mov [assignment_index], rax
     call next_token
     EXPECT '='
     call parse_expression
     EXPECT ';'
     lea rdi, [rel op_store_var]
-    mov rsi, [temp_index]
+    mov rsi, [assignment_index]
     call emit_instruction
     jmp .parse_statements
 
@@ -112,7 +114,7 @@ _start:
     xor eax, eax
     mov [vm_sp], rax
     lea r12, [rel code_stream]
-.vm_dispatch:
+vm_dispatch:
     jmp qword [r12]
 
 ; ---------------------------------------------------------------------------
@@ -256,6 +258,10 @@ next_token:
     ret
 
 .identifier:
+    mov qword [token_text], 0
+    mov qword [token_text + 8], 0
+    mov qword [token_text + 16], 0
+    mov qword [token_text + 24], 0
     xor r8d, r8d                    ; copied character count
 .identifier_loop:
     mov rax, [source_pos]
@@ -406,8 +412,10 @@ parse_additive:
     mov qword [operator_kind], '-'
 .consume_operator:
     call next_token
+    push qword [operator_kind]
     call parse_multiplicative
-    cmp qword [operator_kind], '+'
+    pop rax
+    cmp rax, '+'
     je .emit_add
     lea rdi, [rel op_sub]
     jmp .emit_binary
@@ -439,8 +447,9 @@ parse_multiplicative:
     mov qword [operator_kind], '%'
 .consume_operator:
     call next_token
+    push qword [operator_kind]
     call parse_primary
-    mov rax, [operator_kind]
+    pop rax
     cmp rax, '*'
     je .emit_mul
     cmp rax, '/'
@@ -514,7 +523,7 @@ op_push_const:
     inc rcx
     mov [vm_sp], rcx
     add r12, 16
-    jmp .vm_dispatch
+    jmp vm_dispatch
 
 op_load_var:
     mov rcx, [r12 + 8]
@@ -528,7 +537,7 @@ op_load_var:
     inc rdx
     mov [vm_sp], rdx
     add r12, 16
-    jmp .vm_dispatch
+    jmp vm_dispatch
 
 op_store_var:
     mov rcx, [vm_sp]
@@ -542,7 +551,7 @@ op_store_var:
     jae runtime_stack_error
     mov [variables + rdx * 8], rax
     add r12, 16
-    jmp .vm_dispatch
+    jmp vm_dispatch
 
 op_add:
     call vm_binary_pop
@@ -579,7 +588,7 @@ vm_binary_push:
     inc rcx
     mov [vm_sp], rcx
     add r12, 16
-    jmp .vm_dispatch
+    jmp vm_dispatch
 
 vm_binary_pop:
     mov rcx, [vm_sp]
@@ -620,7 +629,7 @@ op_print:
     call write_all
     jc output_error
     add r12, 16
-    jmp .vm_dispatch
+    jmp vm_dispatch
 
 op_halt:
     xor edi, edi
