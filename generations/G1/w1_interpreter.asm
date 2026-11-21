@@ -59,6 +59,7 @@ section .text
 global _start
 
 _start:
+    cld
     call read_source
     call next_token
 
