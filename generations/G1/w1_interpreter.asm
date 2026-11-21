@@ -17,6 +17,12 @@ default rel
 %define MAX_STACK  256
 
 
+%macro EXPECT 1
+    cmp qword [token_kind], %1
+    jne compile_error
+    call next_token
+%endmacro
+
 section .bss
 source_buf:     resb MAX_SOURCE + 1
 source_len:     resq 1
