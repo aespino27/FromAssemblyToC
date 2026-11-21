@@ -1,3 +1,29 @@
+## 2026-11-20 — G1 W1 interpreter implementation committed; CI pending
+
+Implemented `generations/G1/w1_interpreter.asm` in NASM:
+- Bounded 4096-byte stdin source reader.
+- ASCII lexer with identifiers, keywords, punctuation, decimal literals, and
+  UINT64_MAX overflow detection.
+- One-scope symbol table with duplicate/undeclared-name checks.
+- Recursive-descent parser for the W1 v0.1 grammar and operator precedence.
+- Direct-threaded 16-byte instruction generation.
+- NASM VM handlers for constants, variables, arithmetic, print, and halt.
+- Unsigned decimal output and controlled diagnostics.
+
+Added `scripts/build-g1.sh`, `scripts/test-g1.sh`,
+`.github/workflows/g1.yml`, and learner-facing
+`lessons/G1/01-first-word-language.md`. Updated the G1 and top-level READMEs.
+
+The regression suite covers arithmetic precedence, associativity, nested
+expressions, reassignment, zero initialization, UINT64_MAX, wraparound,
+malformed input, duplicate/undeclared variables, division by zero, identifier
+and source limits, and the 64-variable limit.
+
+**Validation status:** implementation and test harness are committed, but
+the NASM assembler and runtime tests have not yet been confirmed by CI.
+Do not mark G1 runnable until the dedicated G1 workflow passes and any
+failures are corrected.
+
 # Progress Log
 
 ## 2026-11-20 — Learner toolchain baseline updated
