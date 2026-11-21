@@ -1,15 +1,31 @@
 # G1 — W1 Word Language
 
 G1 defines W1, the first deliberately small word-oriented language in the lab.
-Its design is documented in [the W1 language specification](../../docs/G1_LANGUAGE_SPEC.md).
+Its normative design is documented in [the W1 language specification](../../docs/G1_LANGUAGE_SPEC.md).
 
 ## Status
 
-**Specification and conformance fixtures committed; interpreter not yet implemented.**
+**NASM interpreter, build script, regression suite, and learner lab committed. CI validation is pending.**
 
-The files under examples/ are source fixtures for the specified language.
-They are not executable until the NASM interpreter and G1 build/test scripts
-are added. Do not treat this generation as runnable yet.
+The interpreter source is `w1_interpreter.asm`. It implements the bounded
+source reader, lexer, recursive-descent parser, symbol table, direct-threaded
+code generator, virtual machine, unsigned decimal output, and diagnostics
+entirely in NASM. The implementation uses Linux system calls and does not
+link libc or invoke GCC.
+
+Do not begin the learner lab until the G1 GitHub Actions workflow passes.
+
+## Build and test
+
+From the repository root:
+
+    bash scripts/build-g1.sh
+    bash scripts/test-g1.sh
+
+The build produces `build/g1/w1`. The test script rebuilds before running
+positive and negative conformance checks. See
+[Lesson G1.01](../../lessons/G1/01-first-word-language.md) for the learner
+procedure and expected outputs.
 
 ## Design summary
 
@@ -23,11 +39,3 @@ are added. Do not treat this generation as runnable yet.
 The direct-threaded execution model is a modern teaching analogue to the
 threaded-code strategy used by early Unix B implementations, not a reproduction
 of their original source or internal representation.
-
-## Planned implementation
-
-1. Implement bounded source input and lexical analysis.
-2. Implement the parser, declaration table, and expression code generation.
-3. Implement the threaded VM and arithmetic handlers.
-4. Implement print/output and diagnostics.
-5. Add positive and negative regression fixtures and CI coverage.
