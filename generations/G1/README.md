@@ -5,15 +5,16 @@ Its normative design is documented in [the W1 language specification](../../docs
 
 ## Status
 
-**NASM interpreter, build script, regression suite, and learner lab committed. CI validation is pending.**
+<badge>Complete — CI validated</badge>
 
-The interpreter source is `w1_interpreter.asm`. It implements the bounded
-source reader, lexer, recursive-descent parser, symbol table, direct-threaded
-code generator, virtual machine, unsigned decimal output, and diagnostics
-entirely in NASM. The implementation uses Linux system calls and does not
-link libc or invoke GCC.
+The NASM interpreter, build script, regression suite, and learner lab are
+committed. GitHub Actions run #44850709283 passed on Ubuntu 24.04 with
+NASM 2.16.01 and GNU ld 2.42. The run assembled and linked the interpreter
+and ended with **All G1 checks passed.**
 
-Do not begin the learner lab until the G1 GitHub Actions workflow passes.
+The learner's primary environment is Ubuntu 26.04.1 / NASM 3.01. The learner
+should now run the supplied build and regression suite on that VM as the
+environment-specific validation.
 
 ## Build and test
 
@@ -26,6 +27,13 @@ The build produces `build/g1/w1`. The test script rebuilds before running
 positive and negative conformance checks. See
 [Lesson G1.01](../../lessons/G1/01-first-word-language.md) for the learner
 procedure and expected outputs.
+
+## Implementation
+
+The source is `w1_interpreter.asm`. It implements the bounded source reader,
+lexer, recursive-descent parser, symbol table, direct-threaded code generator,
+virtual machine, unsigned decimal output, and diagnostics entirely in NASM.
+It uses Linux system calls directly; it does not link libc or invoke GCC.
 
 ## Design summary
 
