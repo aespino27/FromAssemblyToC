@@ -1,5 +1,25 @@
 # Progress Log
 
+## 2026-11-20 — Learner toolchain baseline updated
+
+The learner confirmed the actual VM toolchain:
+- Ubuntu 26.04.1 LTS, x86-64
+- NASM 3.01
+- GNU ld 2.46
+- GCC 15.2.0
+- GDB 17.1
+
+Updated `environment/README.md` to make this the primary learner baseline.
+Updated `environment/verify.sh` to report GCC and GDB as optional tools:
+they are available for explicitly documented comparison/debugging exercises,
+but GCC is not used to implement or build the lab's language tools. NASM
+remains the implementation language for interpreters, compilers, and runtime
+components.
+
+GitHub Actions remains an independent Ubuntu 24.04 / NASM 2.16.01
+compatibility check. New assembly should avoid unnecessary version-specific
+features and be tested against both toolchains where practical.
+
 ## 2026-11-20 — G0 complete; G1 W1 specification committed
 
 ### G0 verification
@@ -29,7 +49,7 @@
 - Added three W1 source fixtures under `generations/G1/examples/`.
 - Added `generations/G1/README.md`, clearly marking the examples as design
   fixtures and the interpreter as not yet implemented.
-- Updated the architecture plan to make the W1 execution strategy explicit.
+- Updated the architecture plan and recorded the W1 design decision.
 
 ### Next implementation
 Implement the W1 interpreter in NASM in dependency order:
