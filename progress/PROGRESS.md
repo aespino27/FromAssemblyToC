@@ -1,3 +1,15 @@
+## 2026-11-20 — G1 W1 v0.1 passed CI
+
+GitHub Actions run #44850709283 passed on Ubuntu 24.04 with NASM 2.16.01
+and GNU ld 2.42. The interpreter assembled and linked, then all positive
+and negative regression cases passed. The test log ends with
+**All G1 checks passed.**
+
+The initial CI attempt exposed a missing parser macro and then a reversed
+symbol-table copy direction. Both were corrected; the final run passed with
+no assembler warnings. The G1 learner lab is now ready for validation on the
+learner's primary Ubuntu 26.04.1 / NASM 3.01 environment.
+
 ## 2026-11-20 — G1 W1 interpreter implementation committed; CI pending
 
 Implemented `generations/G1/w1_interpreter.asm` in NASM:
